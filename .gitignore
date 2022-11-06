@@ -1,0 +1,11 @@
+# Directories
+/node_modules
+/coverage
+/dist
+
+# Files
+*.log
+.DS_Store
+
+## Dist
+index.cjs.js
