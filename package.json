@@ -39,6 +39,11 @@
   "jest": {
     "preset": "es-jest"
   },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "bracketSpacing": false
+  },
   "peerDependencies": {
     "postcss": "^8.3.0"
   },
