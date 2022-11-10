@@ -20,14 +20,14 @@
 
 ```css
 :root {
-  --G01_a_0: rgb(100% 0% 0% / 0);
+  --G01_a_0: rgba(255, 0, 0, 0);
 }
 :root[data-theme='dark'] {
-  --G01_a_0: rgb(0% 0% 100% / 0);
+  --G01_a_0: rgba(0, 0, 255, 0);
 }
 .foo {
-  color: rgb(0% 0% 100% / 0.5);
-  border-color: rgb(100% 0% 0% / 0.5);
+  color: rgba(0, 0, 255, 0.5);
+  border-color: rgba(255, 0, 0, 0.5);
   background-color: linear-gradient(var(--G01_a_0), var(--G01));
 }
 ```

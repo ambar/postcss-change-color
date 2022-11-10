@@ -26,14 +26,14 @@ test('process readme', async () => {
     )
   ).toMatchInlineSnapshot(`
     ":root {
-      --G01_a_0: rgb(100% 0% 0% / 0);
+      --G01_a_0: rgba(255, 0, 0, 0);
     }
     :root[data-theme="dark"] {
-      --G01_a_0: rgb(0% 0% 100% / 0);
+      --G01_a_0: rgba(0, 0, 255, 0);
     }
     .foo {
-      color: rgb(0% 0% 100% / 0.5);
-      border-color: rgb(100% 0% 0% / 0.5);
+      color: rgba(0, 0, 255, 0.5);
+      border-color: rgba(255, 0, 0, 0.5);
       background-color: linear-gradient(var(--G01_a_0), var(--G01));
     }
     "
@@ -49,7 +49,7 @@ test('process chaining', async () => {
     `)
   ).toMatchInlineSnapshot(`
     "a {
-      color: rgb(50.848% 33.277% 100% / 0.5);
+      color: rgba(129.66, 84.857, 255, 0.5);
     }
     "
   `)
@@ -65,8 +65,8 @@ test('process edge cases', async () => {
     `)
   ).toMatchInlineSnapshot(`
     "a {
-      color: rgb(0% 0% 100%);
-      color: rgb(0% 0% 100%);
+      color: rgba(0, 0, 255);
+      color: rgba(0, 0, 255);
     }
     "
   `)
@@ -83,9 +83,9 @@ test('process literal colors / alpha', async () => {
     `)
   ).toMatchInlineSnapshot(`
     "a {
-      color: rgb(0% 0% 100% / 0.5);
-      color: rgb(0% 0% 100% / 0.5);
-      color: rgb(0% 0% 100% / 0.5);
+      color: rgba(0, 0, 255, 0.5);
+      color: rgba(0, 0, 255, 0.5);
+      color: rgba(0, 0, 255, 0.5);
     }
     "
   `)
@@ -102,9 +102,9 @@ test('process literal colors / lightness', async () => {
     `)
   ).toMatchInlineSnapshot(`
     "a {
-      color: rgb(50.848% 33.277% 100%);
-      color: rgb(50.848% 33.277% 100%);
-      color: rgb(50.848% 33.277% 100%);
+      color: rgba(129.66, 84.857, 255);
+      color: rgba(129.66, 84.857, 255);
+      color: rgba(129.66, 84.857, 255);
     }
     "
   `)
@@ -143,25 +143,25 @@ test('process var', async () => {
     )
   ).toMatchInlineSnapshot(`
     ":root {
-      --ColorGroup1_a_0_5: rgb(100% 0% 0% / 0.5);
+      --ColorGroup1_a_0_5: rgba(255, 0, 0, 0.5);
     }
     :root[data-theme="dark"] {
-      --ColorGroup1_a_0_5: rgb(0% 0% 100% / 0.5);
+      --ColorGroup1_a_0_5: rgba(0, 0, 255, 0.5);
     }
     :root {
-      --ColorGroup2_a_0: rgb(100% 0% 0% / 0);
+      --ColorGroup2_a_0: rgba(255, 0, 0, 0);
     }
     :root[data-theme="dark"] {
-      --ColorGroup2_a_0: rgb(0% 0% 100% / 0);
+      --ColorGroup2_a_0: rgba(0, 0, 255, 0);
     }
     :root {
-      --ColorGroup2_a__9: rgb(100% 0% 0% / 0.9);
+      --ColorGroup2_a__9: rgba(255, 0, 0, 0.9);
     }
     :root[data-theme="dark"] {
-      --ColorGroup2_a__9: rgb(0% 0% 100% / 0.9);
+      --ColorGroup2_a__9: rgba(0, 0, 255, 0.9);
     }
     a {
-      color: rgb(100% 0% 0% / 0.5);
+      color: rgba(255, 0, 0, 0.5);
       border-color: var(--ColorGroup1_a_0_5);
       background: linear-gradient(var(--ColorGroup2_a_0), var(--ColorGroup2_a__9));
     }
@@ -185,16 +185,16 @@ test('relative modify', async () => {
   }`)
   ).toMatchInlineSnapshot(`
     "a {
-      color: rgb(0% 0% 0% / 0.6);
-      color: rgb(0% 0% 0% / 0.6);
-      color: rgb(0% 0% 0% / 0.4);
-      color: rgb(0% 0% 0% / 0.4);
-      color: rgb(0% 0% 0% / 0.52);
-      color: rgb(0% 0% 0% / 0.52);
-      color: rgb(0% 0% 0% / 0.48);
-      color: rgb(0% 0% 0% / 0.48);
-      color: rgb(0% 0% 0% / 0.6);
-      color: rgb(0% 0% 0% / 0.6);
+      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.4);
+      color: rgba(0, 0, 0, 0.4);
+      color: rgba(0, 0, 0, 0.52);
+      color: rgba(0, 0, 0, 0.52);
+      color: rgba(0, 0, 0, 0.48);
+      color: rgba(0, 0, 0, 0.48);
+      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.6);
     }
     "
   `)

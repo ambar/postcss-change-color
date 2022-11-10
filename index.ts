@@ -22,12 +22,19 @@ type PluginOptions = {
   colors?: Record<string, string | string[]>
   /** Color scheme selectors, defaults to `[':root', ':root[data-theme="dark"]']` */
   themeSelectors?: string[]
+  format?: string | {name: string; commas: boolean; coords: string[]}
 }
 
 const defaults: Partial<PluginOptions> = {
   colors: {},
   fn: 'cc',
   themeSelectors: [':root', ':root[data-theme="dark"]'],
+  // TODO: use `rgba_number` https://github.com/LeaVerou/color.js/commit/667c19a60d5a6c8c81e9d07bd217ebda385a10b2
+  format: {
+    name: 'rgba',
+    commas: true,
+    coords: ['<number>[0, 255]', '<number>[0, 255]', '<number>[0, 255]'],
+  },
 }
 
 const changeColor: PluginCreator<PluginOptions> = (options) => {
@@ -49,7 +56,7 @@ changeColor.postcss = true
 
 const transformDecl = (
   decl: Declaration,
-  {colors, fn, themeSelectors}: Required<PluginOptions>,
+  {colors, fn, themeSelectors, format}: Required<PluginOptions>,
   helpers: Helpers,
   reCC: RegExp,
   onRule: (r: Rule) => void
@@ -94,7 +101,10 @@ const transformDecl = (
           const prop = props.join('_')
           const rule = new helpers.Rule({selector: themeSelectors[i]})
           rule.append(
-            new helpers.Declaration({prop, value: newColor.toString()})
+            new helpers.Declaration({
+              prop,
+              value: newColor.toString({format: format as string}),
+            })
           )
           onRule(rule)
           return prop
@@ -108,7 +118,7 @@ const transformDecl = (
         const newColor = transformColor(colorValue, modifiers)
         // @ts-expect-error Oops, no helper in value-parser
         node.type = 'word'
-        node.value = newColor.toString()
+        node.value = newColor.toString({format: format as string})
       }
     }
   })
