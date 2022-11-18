@@ -82,6 +82,8 @@ type PluginOptions = {
   colors?: Record<string, string | string[]>
   /** Color scheme selectors, defaults to `[':root', ':root[data-theme="dark"]']` */
   themeSelectors?: string[]
+  /** Color output format, defaults to `rgba_number` (legacy rgba) */
+  format?: ColorFormat
 }
 ````
 

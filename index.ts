@@ -2,6 +2,9 @@ import type {PluginCreator, Declaration, Helpers, Rule} from 'postcss'
 import parser from 'postcss-value-parser'
 import type ValueParser from 'postcss-value-parser'
 import Color from 'colorjs.io'
+import type {Options} from 'colorjs.io/types/src/serialize'
+
+type ColorFormat = Options['format']
 
 type PluginOptions = {
   /** The function name to change color, defaults to `cc` */
@@ -22,19 +25,15 @@ type PluginOptions = {
   colors?: Record<string, string | string[]>
   /** Color scheme selectors, defaults to `[':root', ':root[data-theme="dark"]']` */
   themeSelectors?: string[]
-  format?: string | {name: string; commas: boolean; coords: string[]}
+  /** Color output format, defaults to `rgba_number` (legacy rgba) */
+  format?: ColorFormat
 }
 
 const defaults: Partial<PluginOptions> = {
   colors: {},
   fn: 'cc',
   themeSelectors: [':root', ':root[data-theme="dark"]'],
-  // TODO: use `rgba_number` https://github.com/LeaVerou/color.js/commit/667c19a60d5a6c8c81e9d07bd217ebda385a10b2
-  format: {
-    name: 'rgba',
-    commas: true,
-    coords: ['<number>[0, 255]', '<number>[0, 255]', '<number>[0, 255]'],
-  },
+  format: 'rgba_number',
 }
 
 const changeColor: PluginCreator<PluginOptions> = (options) => {
@@ -103,7 +102,7 @@ const transformDecl = (
           rule.append(
             new helpers.Declaration({
               prop,
-              value: newColor.toString({format: format as string}),
+              value: newColor.toString({format}),
             })
           )
           onRule(rule)
@@ -118,7 +117,7 @@ const transformDecl = (
         const newColor = transformColor(colorValue, modifiers)
         // @ts-expect-error Oops, no helper in value-parser
         node.type = 'word'
-        node.value = newColor.toString({format: format as string})
+        node.value = newColor.toString({format})
       }
     }
   })

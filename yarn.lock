@@ -919,10 +919,10 @@ color-name@~1.1.4:
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
-colorjs.io@^0.4.1-patch.1:
-  version "0.4.1-patch.1"
-  resolved "https://registry.yarnpkg.com/colorjs.io/-/colorjs.io-0.4.1-patch.1.tgz#3c9388703184196053337b59f8f4338f2b043095"
-  integrity sha512-7UWunVDvnUtWRvGD0hEuGyxIvZvw4QbV8/Hz5fhePZdzyvZ8/Ze3mVGxa/8B084jZGBKJDX0ZwHPL/FDn7PZZA==
+colorjs.io@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/colorjs.io/-/colorjs.io-0.4.2.tgz#5338fc185a8be3b46674420cd2be88389a18145b"
+  integrity sha512-vtpiH+BTzZtzs4Yno0GyoC05Z20fTeLwNJ7lQzjxi8GJJb1SZO2o5yUBAUXzgvrO2JNuyIqur4gb1Z6HBjpd9A==
 
 commondir@^1.0.1:
   version "1.0.1"
