@@ -2,4 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.2 (2022-11-18)
+
+
+### Features
+
+* update colorjs to 0.4.2 ([7f51f4e](https://github.com/ambar/postcss-change-color/commit/7f51f4ec2c294d5bf43e4ee154f8c733394af640))
+
 ### 0.0.1 (2022-11-10)
