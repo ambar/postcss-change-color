@@ -2,11 +2,15 @@
   "name": "postcss-change-color",
   "version": "0.0.2",
   "description": "PostCSS plugin to change color",
+  "license": "MIT",
+  "repository": "ambar/postcss-change-color",
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "source": "index.ts",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "type": "module",
   "exports": {
     ".": {
       "require": "./dist/index.cjs.js",
@@ -30,11 +34,6 @@
     "build": "rollup -c --bundleConfigAsCjs",
     "test": "jest",
     "test:coverage": "jest --coverage"
-  },
-  "license": "MIT",
-  "repository": "ambar/postcss-change-color",
-  "engines": {
-    "node": ">=12.0.0"
   },
   "jest": {
     "preset": "es-jest"
