@@ -1,6 +1,6 @@
 {
   "name": "postcss-change-color",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "PostCSS plugin to change color",
   "license": "MIT",
   "repository": "ambar/postcss-change-color",
