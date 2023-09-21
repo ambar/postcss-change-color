@@ -1,9 +1,16 @@
 import postcss from 'postcss'
+import type {AcceptedPlugin} from 'postcss'
 import prettier from 'prettier'
 import plugin from './index'
 
-async function process(input: string, opts?: Parameters<typeof plugin>[0]) {
-  const result = await postcss([plugin(opts)]).process(input, {from: undefined})
+async function process(
+  input: string,
+  opts?: Parameters<typeof plugin>[0],
+  plugins: AcceptedPlugin[] = []
+) {
+  const result = await postcss([plugin(opts), ...plugins]).process(input, {
+    from: undefined,
+  })
   return prettier.format(result.css, {parser: 'css'})
 }
 
@@ -236,4 +243,65 @@ test('throw', async () => {
   await expect(
     process(`a { color: cc(var(--GERR3) a(0)) }`, {colors})
   ).rejects.toThrowError(/Could not parse x as a color/)
+})
+
+test('work with mixins', async () => {
+  const colors = {
+    '--C01': 'red',
+    '--G01': ['red', 'blue'],
+  }
+
+  expect(
+    await process(
+      `
+      .foo {
+        background: var(--C01);
+        @mixin xOutline;
+      }
+  `,
+      {colors},
+      [
+        require('postcss-custom-properties')({
+          preserve: true,
+        }),
+        require('@csstools/postcss-global-data')({
+          files: ['./__fixtures__/vars.css'],
+        }),
+        require('postcss-mixins')({
+          mixins: {
+            xOutline: {
+              color: 'var(--G01)',
+              border: 'cc(var(--G01) a(0.5))',
+              '::after': {
+                color: 'var(--G01)',
+                border: 'cc(var(--G01) a(0.5))',
+              },
+            },
+          },
+        }),
+      ]
+    )
+  ).toMatchInlineSnapshot(`
+    ":root {
+      --G01_a_0_5: rgba(255, 0, 0, 0.5);
+    }
+    :root[data-theme="dark"] {
+      --G01_a_0_5: rgba(0, 0, 255, 0.5);
+    }
+    :root {
+      --G01_a_0_5: rgba(255, 0, 0, 0.5);
+    }
+    :root[data-theme="dark"] {
+      --G01_a_0_5: rgba(0, 0, 255, 0.5);
+    }
+    .foo {
+      color: var(--G01);
+      border: var(--G01_a_0_5);
+      ::after {
+        color: var(--G01);
+        border: var(--G01_a_0_5);
+      }
+    }
+    "
+  `)
 })

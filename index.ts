@@ -41,6 +41,13 @@ const changeColor: PluginCreator<PluginOptions> = (options) => {
   const reCC = new RegExp(`\\b${opts.fn}\\(`)
   return {
     postcssPlugin: 'postcss-change-color',
+    Root(root, helpers) {
+      const rules: Rule[] = []
+      root.walkDecls((decl) => {
+        transformDecl(decl, opts, helpers, reCC, (r) => rules.push(r))
+      })
+      rules.reverse().forEach((r) => root.prepend(r))
+    },
     Once(root, helpers) {
       const rules: Rule[] = []
       root.walkDecls((decl) => {
